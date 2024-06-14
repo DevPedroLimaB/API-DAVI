@@ -6,7 +6,7 @@ const historico = document.getElementById('historico');
 async function buscarDados(cidade) {
   // Utilize a API de sua escolha (OpenWeatherMap, AccuWeather, etc.)
   // Substitua 'SEU_CHAVE_API' pela sua chave da API
-  const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=SEU_CHAVE_API&units=metric`);
+  const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=app.js&units=metric`);
   const dados = await response.json();
   return dados;
 }
