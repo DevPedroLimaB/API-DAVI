@@ -1,35 +1,21 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-// Temperaturas FICTICIAS
-const temperaturaPorCidade = {
-  "New York": 25,
-  "Recife": "Temperatura proxima ao inferno", 
-  "Tokyo": 30,
-  "London": 20,
-  "Paris": 22,
-  "Rio de Janeiro": 28
-};
+// Carregue seus controladores aqui
+const usuarioController = require('./controllers/usuarioController');
+const aulaController = require('./controllers/aulaController');
+const treinoController = require('./controllers/treinoController');
 
-// ROTAS
-app.get('/temperatura/:cidade', (req, res) => {
-  const cidade = req.params.cidade;
-  const temperatura = temperaturaPorCidade[cidade];
-  
-  if (temperatura !== undefined) {
-    res.json({ cidade, temperatura });
-  } else {
-    res.status(404).json({ mensagem: "Cidade não encontrada" });
-  }
-});
+// Utilize rotas para definir endpoints da API
+app.use('/usuarios', usuarioController);
+app.use('/aulas', aulaController);
+app.use('/treinos', treinoController);
 
-// Rotapra ver se ta disponivel
-app.get('/cidades', (req, res) => {
-  const cidades = Object.keys(temperaturaPorCidade);
-  res.json({ cidades });
-});
-
+// Inicie o servidor
 app.listen(port, () => {
-  console.log(`Servidor rodando em http://localhost:3000`);
+  console.log(`Servidor escutando na porta ${port}`);
+
+// app.js
+app.post('/matriculas', matriculaController.cadastrarMatricula);
 });
